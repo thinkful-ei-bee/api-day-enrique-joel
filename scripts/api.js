@@ -46,10 +46,11 @@ const api = (function () {
         }
         if (res.status !== 200) {
           store.errorKeys.push({ 'error': `${res.status} - Is API endpoint valid?` });
+          return;
         }
 
-        // echo out entire response for testing if need be
-        //console.log(res);
+        // echo out entire response for testing
+        console.log(res);
 
         // In either case, parse the JSON stream:
         return res.json();
