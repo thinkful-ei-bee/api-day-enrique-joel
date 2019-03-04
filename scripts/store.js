@@ -6,7 +6,7 @@
 const store = (function(){
   const addItem = function(item) {
   
-    this.items.push(item)
+    this.items.push(item);
   };
 
   const findById = function(id) {
@@ -16,13 +16,11 @@ const store = (function(){
   const findAndUpdate = function (id, newData){
     return Object.assign(this.findById(id), newData);
     
-  }
+  };
 
   const findAndDelete = function(id) {
     this.items = this.items.filter(item => item.id !== id);
   };
-
-  
 
   const toggleCheckedFilter = function() {
     this.hideCheckedItems = !this.hideCheckedItems;
