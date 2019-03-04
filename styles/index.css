@@ -58,7 +58,7 @@ button:hover:disabled {
   width: 100vw;
   background-color: #8fb7e3;
   position: absolute;
-  display: fixed;
+  display: none;
   text-align: center;
   margin: 0 auto;
   padding: 15px;

@@ -51,6 +51,10 @@ const shoppingList = (function(){
     if (store.searchTerm) {
       items = items.filter(item => item.name.includes(store.searchTerm));
     }
+
+    if(store.errorKeys.length > 0) {
+      $('#toast').toggle().text(store.errorKeys[store.errorKeys.length - 1]);
+    }
   
     // render the shopping list in the DOM
     console.log('`render` ran');
@@ -60,6 +64,10 @@ const shoppingList = (function(){
     $('.js-shopping-list').html(shoppingListItemsString);
   }
   
+  function renderError(err) {
+    store.errorKeys.push(err.message);
+    render();
+  }
   
   function handleNewItemSubmit() {
     $('#js-shopping-list-form').submit(function (event) {
@@ -68,11 +76,11 @@ const shoppingList = (function(){
       $('.js-shopping-list-entry').val('');
 
       api.createItem(newItemName)
-        .then(res => res.json())
         .then((newItem) => {
           store.addItem(newItem);
           render();
-        });
+        })
+        .catch(err => renderError(err));
 
     });
   }
@@ -95,7 +103,8 @@ const shoppingList = (function(){
         .then(() => {
           store.findAndUpdate(id, { checked: !item.checked });
           render();
-        });
+        })
+        .catch(err => renderError(err));
 
     });
   }
@@ -109,8 +118,9 @@ const shoppingList = (function(){
         .then(() => {
           store.findAndDelete(id);
           render();
-        });
-
+        })
+        .catch(err => renderError(err));
+        
     });
   }
   
@@ -123,13 +133,11 @@ const shoppingList = (function(){
       api.updateItem(id, {
         name: itemName,
       })
-        .then(res => res.json())
-        .then((item) => {
-          store.findAndUpdateName(id, itemName);
-          store.setItemIsEditing(id, false);
+        .then(() => {
+          store.findAndUpdate(id, itemName, false);
           render();
-        });
-
+        })
+        .catch(err => renderError(err));
     });
   }
   
