@@ -8,9 +8,23 @@ const api = (function () {
     return fetch(`${baseUrl}/items`);
   }
 
+  function createItem(name) {
+    let newItem= {
+      name,
+    }
+    newItem = JSON.stringify(newItem);
+    return fetch(`${baseUrl}/items`, {
+      method: 'POST', 
+      headers: {"Content-Type": "application/json",}, 
+      body: newItem  })
+
+  }
+
+
+
   return{
     getItems,
-
+    createItem,
   };
 
 })();
