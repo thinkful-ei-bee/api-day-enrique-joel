@@ -8,6 +8,12 @@ const api = (function () {
     return listApiFetch(`${baseUrl}/items`);
   }
 
+  function deleteItem(id) {
+    return listApiFetch(`${baseUrl}/items/${id}`,{
+      method: 'DELETE',    
+    });
+  }
+
   function createItem(name) {
     return listApiFetch(`${baseUrl}/items`, {
       method: 'POST', 
@@ -54,6 +60,7 @@ const api = (function () {
 
   return{
     getItems,
+    deleteItem,
     createItem,
     updateItem,
   };
