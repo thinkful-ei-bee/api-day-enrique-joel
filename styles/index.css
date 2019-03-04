@@ -53,3 +53,13 @@ button:hover:disabled {
 .shopping-item__checked {
   text-decoration: line-through;
 }
+
+#toast {
+  width: 100vw;
+  background-color: #8fb7e3;
+  position: absolute;
+  display: fixed;
+  text-align: center;
+  margin: 0 auto;
+  padding: 15px;
+}

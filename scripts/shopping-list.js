@@ -155,6 +155,12 @@ const shoppingList = (function(){
       render();
     });
   }
+
+  function handleError() {
+    $('#toast').click( event => {
+      $(event.target).toggle();
+    });
+  }
   
   function bindEventListeners() {
     handleNewItemSubmit();
@@ -164,6 +170,7 @@ const shoppingList = (function(){
     handleToggleFilterClick();
     handleShoppingListSearch();
     handleItemStartEditing();
+    handleError();
   }
 
   // This object contains the only exposed methods from this module:
