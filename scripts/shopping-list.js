@@ -35,13 +35,11 @@ const shoppingList = (function(){
       </li>`;
   }
   
-  
   function generateShoppingItemsString(shoppingList) {
     const items = shoppingList.map((item) => generateItemElement(item));
     return items.join('');
   }
-  
-  
+   
   function render() {
     // Filter item list if store prop is true by item.checked === false
     let items = [ ...store.items ];

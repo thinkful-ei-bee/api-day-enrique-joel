@@ -5,7 +5,6 @@
 // eslint-disable-next-line no-unused-vars
 const store = (function(){
   const addItem = function(item) {
-  
     this.items.push(item);
   };
 
@@ -15,7 +14,6 @@ const store = (function(){
 
   const findAndUpdate = function (id, newData){
     return Object.assign(this.findById(id), newData);
-    
   };
 
   const findAndDelete = function(id) {
@@ -37,9 +35,9 @@ const store = (function(){
 
   return {
     items: [],
+    errorKeys: [],
     hideCheckedItems: false,
     searchTerm: '',
-
     addItem,
     findById,
     findAndUpdate,
