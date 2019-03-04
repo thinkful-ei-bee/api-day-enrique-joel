@@ -1,22 +1,16 @@
 'use strict';
 
-/* global shoppingList, store */
+/* global shoppingList, store, api */
 
 $(document).ready(function() {
   shoppingList.bindEventListeners();
   shoppingList.render();
 
-  api.getItems()
-    .then(res => res.json())
-    .then((items) => {
-      items.forEach((item)=> store.addItem(item));
-      shoppingList.render();
-    })
-
+  // test code here
 
 });
 
-store.items.push(Item.create('apples'));
+//store.items.push(Item.create('apples'));
 
 
 
