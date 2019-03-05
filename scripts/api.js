@@ -40,31 +40,25 @@ const api = (function () {
     return fetch(...args)
       .then(res => {
         if (!res.ok) {
-          // Valid HTTP response but non-2xx status - let's create an error!
-          store.errorKeys.push({ 'error': `${res.status} - Is API endpoint valid?` });
-          return;
+         //took away the extra return statements and reassigned error to use it 
+         //as a boolean in the next chain
+         error = {code: res.status};
+          store.errorKeys.push(error);
+        
         }
-        if (res.status !== 200) {
-          store.errorKeys.push({ 'error': `${res.status} - Is API endpoint valid?` });
-          return;
-        }
-
-        // echo out entire response for testing
-        console.log(res);
-
-        // In either case, parse the JSON stream:
         return res.json();
       })
   
       .then(data => {
-        // If error was flagged, reject the Promise with the error object
-        if (error) {
-          store.errorKeys.push({ 'error': `${data.message} - Is URL malformed?`});
+      
+        
+        if (error) { // if error is true, then this happens
+          error.message=data.message;
           return Promise.reject(error);
         }
         
         // Otherwise give back the data as resolved Promise
-        store.errorKeys = [];
+        
         return data;
       });
   }

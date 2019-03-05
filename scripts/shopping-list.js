@@ -52,9 +52,9 @@ const shoppingList = (function(){
       items = items.filter(item => item.name.includes(store.searchTerm));
     }
 
-    if(store.errorKeys.length > 0) {
-      $('#toast').toggle().text(store.errorKeys[store.errorKeys.length - 1]);
-    }
+    // if(store.errorKeys.length > 0) {
+    //   $('#toast').toggle().text(store.errorKeys[store.errorKeys.length - 1]);
+    // }
   
     // render the shopping list in the DOM
     console.log('`render` ran');
@@ -65,7 +65,9 @@ const shoppingList = (function(){
   }
   
   function renderError(err) {
-    store.errorKeys.push(err.message);
+    console.log('here')
+    let errormsg = 'hey';
+    $('#toast').toggle().text(errormsg);
     render();
   }
   
@@ -112,8 +114,8 @@ const shoppingList = (function(){
   function handleDeleteItemClicked() {
     // like in `handleItemCheckClicked`, we use event delegation
     $('.js-shopping-list').on('click', '.js-item-delete', event => {
-      const id = getItemIdFromElement(event.currentTarget);
-      //const id = 12312123;
+      // const id = getItemIdFromElement(event.currentTarget);
+      const id = 12312123;
       api.deleteItem(id)
         .then(() => {
           store.findAndDelete(id);
