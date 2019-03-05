@@ -65,9 +65,8 @@ const shoppingList = (function(){
   }
   
   function renderError(err) {
-    console.log('here')
     let errormsg = 'hey';
-    $('#toast').toggle().text(errormsg);
+    $('#toast').toggle().text(err.message);
     render();
   }
   
@@ -83,7 +82,6 @@ const shoppingList = (function(){
           render();
         })
         .catch(err => renderError(err));
-
     });
   }
   
@@ -114,8 +112,8 @@ const shoppingList = (function(){
   function handleDeleteItemClicked() {
     // like in `handleItemCheckClicked`, we use event delegation
     $('.js-shopping-list').on('click', '.js-item-delete', event => {
-      // const id = getItemIdFromElement(event.currentTarget);
-      const id = 12312123;
+      const id = getItemIdFromElement(event.currentTarget);
+
       api.deleteItem(id)
         .then(() => {
           store.findAndDelete(id);
@@ -136,7 +134,8 @@ const shoppingList = (function(){
         name: itemName,
       })
         .then(() => {
-          store.findAndUpdate(id, itemName, false);
+          store.findAndUpdate(id, { name: itemName } );
+          store.setItemIsEditing(id, false);
           render();
         })
         .catch(err => renderError(err));
